@@ -25,6 +25,7 @@ def evaluate(state):
 def boat_brute_force(*items):
     items_arr = to_array(items)
     result = dict()
+    best = dict()
     for perm in itertools.permutations(items_arr):
         eval = evaluate(perm)
         hashable = tuple(perm)
@@ -82,12 +83,12 @@ def boat_heuristic(*items):
 
 
 if __name__ == "__main__":
-    testing_array = []
-    print(min(boat_brute_force(1000, 31, 2, 10, 12).values()))
-    # print(boat_monte_carlo(12, 31, 521))
-    print(min(boat_heuristic(1000, 31, 2, 10, 12).values()))
-
-# {(12, 31, 521, 123): 80, (12, 31, 123, 521): 478, (12, 521, 31, 123): 410, (12, 521, 123, 31): 502, (12, 123, 31, 521): 386, (12, 123, 521, 31): 104, (31, 12, 521, 123): 80, (31, 12, 123, 521): 478, (31, 521, 12, 123): 429, (31, 521, 123, 12): 540, (31, 123, 12, 521): 367, (31, 123, 521, 12): 142, (521, 12, 31, 123): 410 |||, (521, 12, 123, 31): 502, (521, 31, 12, 123): 429, (521, 31, 123, 12): 540, (521, 123, 12, 31): 613, (521, 123, 31, 12): 632, (123, 12, 31, 521): 386, (123, 12, 521, 31): 104, (123, 31, 12, 521): 367, (123, 31, 521, 12): 142, (123, 521, 12, 31): 613, (123, 521, 31, 12): 632}
-
+    dic_brute = boat_brute_force(4, 3, 2, 1, 1, 3, 20, 42, 15)
+    dic_heuristic = boat_heuristic(4, 3, 2, 1, 1, 3, 20, 42, 15)
+    dic_random = boat_monte_carlo(4, 3, 2, 1, 1, 3, 20, 42, 15)
+    best_brute = min(dic_brute.values())
+    best_heur = min(dic_heuristic.values())
+    best_rand = min(dic_random.values())
+    print(f"brute: {best_brute}, heuristic: {best_heur}, random: {best_rand}")
 
 # 10
